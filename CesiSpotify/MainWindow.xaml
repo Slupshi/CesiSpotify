@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:CesiSpotify.UserControls"
         xmlns:local="clr-namespace:CesiSpotify"
         mc:Ignorable="d"
         Title="MainWindow" Height="1080" Width="1920">
@@ -16,9 +17,11 @@
             <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <!--AppBar-->
         <Grid Background="{StaticResource SpotifyDarkGreenBrush}" Grid.Row="0" Grid.ColumnSpan="2">
             <TextBlock Text="CesiFy" FontSize="40" FontWeight="Bold" Foreground="White"></TextBlock>
         </Grid>
+        <!--NavBar-->
         <Grid Grid.Column="0" Grid.Row="1" Background="{StaticResource SpotifyGreenBrush}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -27,13 +30,13 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Content="Nav1" Style="{StaticResource NavButtonStyle}"></Button>
-            <Button Grid.Row="1" Content="Nav2" Style="{StaticResource NavButtonStyle}"></Button>
-            <Button Grid.Row="2" Content="Nav3" Style="{StaticResource NavButtonStyle}"></Button>
-            <Button Grid.Row="3" Content="Nav4" Style="{StaticResource NavButtonStyle}"></Button>
+            <Button Grid.Row="0" Content="Artists" Style="{StaticResource NavButtonStyle}" Click="NavArtistsButtonClicked"></Button>
+            <Button Grid.Row="1" Content="Album" Style="{StaticResource NavButtonStyle}" Click="NavAlbumsButtonClicked"></Button>
+            <Button Grid.Row="2" Content="Tracks" Style="{StaticResource NavButtonStyle}" Click="NavTracksButtonClicked"></Button>
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="1" Background="{StaticResource SpotifyGrayBrush}">
-            <Button Content="Toto" Click="Button_Click" Height="30" Width="100"></Button>
+        <!--Content-->
+        <Grid x:Name="ContentGrid" Grid.Column="1" Grid.Row="1" Background="{StaticResource SpotifyGrayBrush}">
+            <uc:ArtistsUC/>
         </Grid>
     </Grid>
 </Window>

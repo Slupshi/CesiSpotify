@@ -4,9 +4,10 @@
 
 
     <Style x:Key="NavButtonStyle" TargetType="Button">
-        <Setter Property="Padding" Value="20"></Setter>
+        <Setter Property="Padding" Value="17"></Setter>
         <Setter Property="Background" Value="Transparent"></Setter>
         <Setter Property="FontSize" Value="20"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>        
     </Style>
 
     <Brush x:Key="SpotifyDarkGreenBrush">#FF1DB954</Brush>

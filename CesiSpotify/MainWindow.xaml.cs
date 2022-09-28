@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using CesiSpotify.UserControls;
 
 namespace CesiSpotify
 {
@@ -12,9 +13,22 @@ namespace CesiSpotify
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void NavArtistsButtonClicked(object sender, RoutedEventArgs e)
         {
+            ContentGrid.Children.Clear();
+            ContentGrid.Children.Add(new ArtistsUC());
+        }
 
+        private void NavAlbumsButtonClicked(object sender, RoutedEventArgs e)
+        {
+            ContentGrid.Children.Clear();
+            ContentGrid.Children.Add(new AlbumUC());
+        }
+
+        private void NavTracksButtonClicked(object sender, RoutedEventArgs e)
+        {
+            ContentGrid.Children.Clear();
+            ContentGrid.Children.Add(new TracksUC());
         }
     }
 }
