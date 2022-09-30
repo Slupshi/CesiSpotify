@@ -2,16 +2,100 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     x:Name="Styles">
 
-
-    <Style x:Key="NavButtonStyle" TargetType="Button">
-        <Setter Property="Padding" Value="17"></Setter>
-        <Setter Property="Background" Value="Transparent"></Setter>
-        <Setter Property="FontSize" Value="20"></Setter>
-        <Setter Property="Cursor" Value="Hand"></Setter>        
+    <Style x:Key="NavButtonStyle"
+           TargetType="Button">
+        <Setter Property="Height"
+                Value="70" />
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="FontSize"
+                Value="20" />
+        <Setter Property="Cursor"
+                Value="Hand" />
+        <Setter Property="FontWeight"
+                Value="DemiBold" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="{DynamicResource SpotifyDarkGreenBrush}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
-    <Brush x:Key="SpotifyDarkGreenBrush">#FF1DB954</Brush>
-    <Brush x:Key="SpotifyGreenBrush">#FF1ED760</Brush>
-    <Brush x:Key="SpotifyGrayBrush">#FF535353</Brush>
+    <Style x:Key="TitleTextStyle"
+           TargetType="TextBlock">
+        <Setter Property="FontSize"
+                Value="40" />
+        <Setter Property="FontWeight"
+                Value="Bold" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource WhiteBrush}" />
+    </Style>
+
+    <Style x:Key="SearchButtonStyle"
+           TargetType="Button">
+        <Setter Property="Background"
+                Value="{DynamicResource SpotifyGreenBrush}" />
+        <Setter Property="Cursor"
+                Value="Hand" />
+        <Setter Property="FontSize"
+                Value="15" />
+        <Setter Property="FontWeight"
+                Value="DemiBold" />
+        <Setter Property="Foreground"
+                Value="{DynamicResource WhiteBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            CornerRadius="0,20,20,0">
+                        <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+                     Value="True">
+                <Setter Property="Background"
+                        Value="{DynamicResource SpotifyDarkGreenBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Color x:Key="White">
+        #FFFFFFFF
+    </Color>
+    <Brush x:Key="WhiteBrush">
+        #FFFFFFFF
+    </Brush>
+
+    <Brush x:Key="SpotifyDarkGreenBrush">
+        #FF1DB954
+    </Brush>
+    <Brush x:Key="SpotifyGreenBrush">
+        #FF1ED760
+    </Brush>
+    <Brush x:Key="SpotifyLightGrayBrush">
+        #FFB3B3B3
+    </Brush>
+    <Brush x:Key="SpotifyGrayBrush">
+        #FF535353
+    </Brush>
+    <Brush x:Key="SpotifyBlackBrush">
+        #FF191414
+    </Brush>
 
 </ResourceDictionary>

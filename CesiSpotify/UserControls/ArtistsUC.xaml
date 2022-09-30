@@ -1,12 +1,129 @@
 ﻿<UserControl x:Class="CesiSpotify.UserControls.ArtistsUC"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CesiSpotify.UserControls"
-             mc:Ignorable="d" 
-             x:Name="ArtistsUserControl">
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:CesiSpotify.ViewModels"
+             x:Name="ArtistsUserControl"
+             mc:Ignorable="d">
     <Grid>
-        <Button Content="Toto" Height="30" Width="100"></Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                    Margin="100, 0, 0, 0"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <TextBlock Text="Search for Artists">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground"
+                                Value="{StaticResource SpotifyLightGrayBrush}" />
+                        <Setter Property="FontSize"
+                                Value="30" />
+                        <Setter Property="FontWeight"
+                                Value="Bold" />
+                        <Setter Property="TextAlignment"
+                                Value="Center" />
+                        <Setter Property="Padding"
+                                Value="15, 0" />
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBox x:Name="SearchBar">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Background"
+                                Value="{StaticResource SpotifyGrayBrush}" />
+                        <Setter Property="Foreground"
+                                Value="{StaticResource WhiteBrush}" />
+                        <Setter Property="Height"
+                                Value="40" />
+                        <Setter Property="Width"
+                                Value="500" />
+                        <Setter Property="Margin"
+                                Value="0" />
+                        <Setter Property="Padding"
+                                Value="13,0" />
+                        <Setter Property="VerticalAlignment"
+                                Value="Center" />
+                        <Setter Property="VerticalContentAlignment"
+                                Value="Center" />
+                        <Setter Property="FontSize"
+                                Value="20" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TextBox">
+                                    <Border x:Name="border"
+                                            Background="{StaticResource SpotifyGrayBrush}"
+                                            BorderBrush="{StaticResource SpotifyLightGrayBrush}"
+                                            BorderThickness="2"
+                                            CornerRadius="20,0,0,20"
+                                            SnapsToDevicePixels="True">
+                                        <ScrollViewer x:Name="PART_ContentHost"
+                                                      Focusable="false"
+                                                      HorizontalScrollBarVisibility="Hidden"
+                                                      VerticalScrollBarVisibility="Hidden" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver"
+                                                 Value="True">
+                                            <Setter TargetName="border"
+                                                    Property="BorderBrush"
+                                                    Value="{StaticResource WhiteBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="IsFocused"
+                                                 Value="True">
+                                            <Setter TargetName="border"
+                                                    Property="BorderBrush"
+                                                    Value="{StaticResource WhiteBrush}" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Button Width="100"
+                    Height="40"
+                    Click="SearchButtonClicked"
+                    Content="Rechercher"
+                    Style="{StaticResource SearchButtonStyle}" />
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        Orientation="Vertical">
+                <TextBlock Margin="0,15"
+                           FontSize="20"
+                           FontWeight="DemiBold"
+                           Foreground="{StaticResource SpotifyLightGrayBrush}">
+                    <Run Text="Results for &quot;" />
+                    <Run Text="{Binding SearchWord,
+                                        Mode=OneWay}" />
+                    <Run Text="&quot;" />
+                </TextBlock>
+                <lvc:CartesianChart x:Name="PopularityGraph"
+                                    Width="1000"
+                                    Height="400"
+                                    Background="{StaticResource SpotifyGrayBrush}"
+                                    Series="{Binding PopularitySeries}"
+                                    TooltipPosition="Top"
+                                    XAxes="{Binding PopularityXAxes}"
+                                    YAxes="{Binding PopularityYAxes}" />
+                <lvc:CartesianChart x:Name="FollowsGraph"
+                                    Width="1000"
+                                    Height="400"
+                                    Margin="0, 30"
+                                    Background="{StaticResource SpotifyGrayBrush}"
+                                    Series="{Binding FollowsSeries}"
+                                    TooltipPosition="Top"
+                                    XAxes="{Binding FollowsXAxes}"
+                                    YAxes="{Binding FollowsYAxes}" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

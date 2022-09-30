@@ -1,32 +1,39 @@
 ﻿using System.Windows;
 using CesiSpotify.Services;
+using CesiSpotify.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.Kernel;
 
 namespace CesiSpotify
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         private ServiceProvider _serviceProvider;
         private ServiceCollection _services;
         private ApiService _apiService;
+        private LocalApiService _localApiService;
         private SpotifyService _spotifyService;
+        private MainViewModel _mainViewModel;
 
-        public App()
+        protected override void OnStartup(StartupEventArgs e)
         {
+            base.OnStartup(e);
+
             _services = new ServiceCollection();
             _services.AddSingleton<ApiService>();
+            _services.AddSingleton<LocalApiService>();
             _services.AddSingleton<SpotifyService>();
+            _services.AddSingleton<MainViewModel>();
             _serviceProvider = _services.BuildServiceProvider();
-        }
 
-        private async void Application_Startup(object sender, StartupEventArgs e)
-        {
             _apiService = _serviceProvider.GetService<ApiService>();
+            _localApiService = _serviceProvider.GetService<LocalApiService>();
             _spotifyService = _serviceProvider.GetService<SpotifyService>();
-            new MainWindow().Show();
+            _mainViewModel = _serviceProvider.GetService<MainViewModel>();
+
+            new MainWindow(_mainViewModel, _spotifyService).Show();
         }
     }
 }

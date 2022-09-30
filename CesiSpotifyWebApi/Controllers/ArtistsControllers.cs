@@ -82,10 +82,10 @@ namespace CesiSpotifyWebApi.Controllers
         [HttpPost]
         public async Task Post([FromBody] SpotifyArtist spotifyArtist)
         {
-            await using var conn = new NpgsqlConnection(_configuration.GetConnectionString("SpoopyDB"));
+            await using var conn = new NpgsqlConnection(_configuration.GetConnectionString("CesifyDB"));
             await conn.OpenAsync();
 
-            await using (var cmd = new NpgsqlCommand("INSERT INTO roles (artistid, name, url, iconurl, popularity, followscount, genres) VALUES ($1, $2, $3, $4, $5, $6, $7)", conn))
+            await using (var cmd = new NpgsqlCommand("INSERT INTO artists (artistid, name, url, iconurl, popularity, followscount, genres) VALUES ($1, $2, $3, $4, $5, $6, $7)", conn))
             {
                 cmd.Parameters.AddWithValue(spotifyArtist.ArtistId);
                 cmd.Parameters.AddWithValue(spotifyArtist.Name);
